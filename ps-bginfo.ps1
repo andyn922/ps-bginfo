@@ -119,11 +119,11 @@ Function Add-BGInfo {
     # Calculate Key and Value string size
     $ComputerInfo.Keys | ForEach-Object { 
         $_currItem = $_
-        $ComputerInfo.Item($_currItem) | Add-Member -NotePropertyName "KeyDimensions" -NotePropertyValue $Image.MeasureString($_currItem, $ComputerInfoFont)
-        $ComputerInfo.Item($_currItem) | Add-Member -NotePropertyName "ValueDimensions" -NotePropertyValue $Image.MeasureString($ComputerInfo.Item($_currItem).Text, $ComputerInfoFont)
-        $ComputerInfo.Item($_currItem) | Add-Member -NotePropertyName "CombinedWidth" -NotePropertyValue $CombinedWidth
-        $CombinedWidth = $ComputerInfo.Item($_currItem).KeyDimensions.Width + $ComputerInfo.Item($_currItem).ValueDimensions.Width
-    }
+        $ComputerInfo.Item($_currItem) | Add-Member -Force -NotePropertyName "KeyDimensions" -NotePropertyValue $Image.MeasureString($_currItem, $ComputerInfoFont)
+        $ComputerInfo.Item($_currItem) | Add-Member -Force -NotePropertyName "ValueDimensions" -NotePropertyValue $Image.MeasureString($ComputerInfo.Item($_currItem).Text, $ComputerInfoFont)
+        $ComputerInfo.Item($_currItem) | Add-Member -Force -NotePropertyName "CombinedWidth" -NotePropertyValue $CombinedWidth
+		$CombinedWidth = $ComputerInfo.Item($_currItem).KeyDimensions.Width + $ComputerInfo.Item($_currItem).ValueDimensions.Width
+	}
 
     # Fetch max string sizes
     # $maxCombined = $ComputerInfo.GetEnumerator() | Sort-Object { $_.Value.CombinedWidth } -Descending | Select-Object -First 1
